@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>服务器iptables规则配置简单版 | 炼丹小本本</title>
+    <meta name="generator" content="VuePress 1.9.8">
+    
+    <meta name="description" content=" ">
+    
+    <link rel="preload" href="/assets/css/0.styles.db5e3e28.css" as="style"><link rel="preload" href="/assets/js/app.41c20b16.js" as="script"><link rel="preload" href="/assets/js/2.cfef0441.js" as="script"><link rel="preload" href="/assets/js/10.438ffba0.js" as="script"><link rel="preload" href="/assets/js/7.38e4a3bd.js" as="script"><link rel="prefetch" href="/assets/js/11.fd7a25e3.js"><link rel="prefetch" href="/assets/js/12.472c8304.js"><link rel="prefetch" href="/assets/js/13.231022aa.js"><link rel="prefetch" href="/assets/js/14.3a0b5387.js"><link rel="prefetch" href="/assets/js/15.703eb145.js"><link rel="prefetch" href="/assets/js/16.38439872.js"><link rel="prefetch" href="/assets/js/17.a88e0ae0.js"><link rel="prefetch" href="/assets/js/18.6b330f3c.js"><link rel="prefetch" href="/assets/js/19.3d874196.js"><link rel="prefetch" href="/assets/js/20.e6b31528.js"><link rel="prefetch" href="/assets/js/21.81c87ba5.js"><link rel="prefetch" href="/assets/js/22.a11fe7df.js"><link rel="prefetch" href="/assets/js/23.67272fd4.js"><link rel="prefetch" href="/assets/js/24.f295c206.js"><link rel="prefetch" href="/assets/js/25.ad750fed.js"><link rel="prefetch" href="/assets/js/26.25237f95.js"><link rel="prefetch" href="/assets/js/27.b6ce1a78.js"><link rel="prefetch" href="/assets/js/28.8332dcc7.js"><link rel="prefetch" href="/assets/js/29.bdfff596.js"><link rel="prefetch" href="/assets/js/3.9d173ece.js"><link rel="prefetch" href="/assets/js/30.6290200d.js"><link rel="prefetch" href="/assets/js/31.04ec0ef5.js"><link rel="prefetch" href="/assets/js/4.c95c1cfc.js"><link rel="prefetch" href="/assets/js/5.c2955b74.js"><link rel="prefetch" href="/assets/js/6.e34411cc.js"><link rel="prefetch" href="/assets/js/8.a52f8de6.js"><link rel="prefetch" href="/assets/js/9.f1fde147.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.db5e3e28.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">炼丹小本本</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Notes" class="dropdown-title"><span class="title">Notes</span> <span class="arrow down"></span></button> <button type="button" aria-label="Notes" class="mobile-dropdown-title"><span class="title">Notes</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/basic_operations_of_linux/index.html" class="nav-link">
+  《Linux基操》
+</a></li><li class="dropdown-item"><!----> <a href="/programming_magic/index.html" class="nav-link">
+  《编程奇技淫巧》
+</a></li></ul></div></div> <a href="https://github.com/zfhxi/DLEnvSkills" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Notes" class="dropdown-title"><span class="title">Notes</span> <span class="arrow down"></span></button> <button type="button" aria-label="Notes" class="mobile-dropdown-title"><span class="title">Notes</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/basic_operations_of_linux/index.html" class="nav-link">
+  《Linux基操》
+</a></li><li class="dropdown-item"><!----> <a href="/programming_magic/index.html" class="nav-link">
+  《编程奇技淫巧》
+</a></li></ul></div></div> <a href="https://github.com/zfhxi/DLEnvSkills" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/basic_operations_of_linux/" aria-current="page" class="sidebar-link">《Linux基操》</a></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>深度学习环境配置</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Linux系统配置</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/basic_operations_of_linux/Linux系统配置/01-linux_static_ip.html" class="sidebar-link">Linux静态IP设定</a></li><li><a href="/basic_operations_of_linux/Linux系统配置/02-server_iptables_simple.html" class="active sidebar-link">服务器iptables规则配置简单版</a></li><li><a href="/basic_operations_of_linux/Linux系统配置/03-user_add_del.html" class="sidebar-link">用户增删</a></li><li><a href="/basic_operations_of_linux/Linux系统配置/04-campus_network.html" class="sidebar-link">校园内网联网</a></li><li><a href="/basic_operations_of_linux/Linux系统配置/05-linux_mount_disk.html" class="sidebar-link">Linux挂载硬盘</a></li><li><a href="/basic_operations_of_linux/Linux系统配置/06-linux_cpu_freq.html" class="sidebar-link">Linux下CPU频率调整</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>效率神器</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Shell零碎脚本</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>其他</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="服务器iptables规则配置简单版"><a href="#服务器iptables规则配置简单版" class="header-anchor">#</a> 服务器iptables规则配置简单版</h1> <p>参考：<a href="https://wiki.archlinux.org/title/iptables_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener noreferrer">https://wiki.archlinux.org/title/iptables_(简体中文)<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <h2 id="初始配置"><a href="#初始配置" class="header-anchor">#</a> 初始配置</h2> <p>下面的操作以Archlinux为例，请事先保证安装了iptables和ipset包。</p> <p>启动iptables</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">cp</span> /etc/iptables/empty.rules /etc/iptables/iptables.rules
+systemctl start iptables
+
+iptables <span class="token parameter variable">-nvL</span> --line-numbers
+</code></pre></div><p>停止iptables</p> <div class="language-bash extra-class"><pre class="language-bash"><code>iptables <span class="token parameter variable">--flush</span> <span class="token comment">#or iptables -F    //清空所有规则</span>
+systemctl stop iptables
+</code></pre></div><h2 id="常见操作"><a href="#常见操作" class="header-anchor">#</a> 常见操作</h2> <p>删除规则：</p> <p>参考：<a href="http://blog.51yip.com/linux/1404.html" target="_blank" rel="noopener noreferrer">http://blog.51yip.com/linux/1404.html<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <div class="language-bash extra-class"><pre class="language-bash"><code>iptables <span class="token parameter variable">-nvL</span> --line-numbers
+iptables <span class="token parameter variable">-D</span> INPUT <span class="token number">3</span>  //删除input的第3条规则
+</code></pre></div><p>保存命令行输入的规则到默认规则：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>iptables-save <span class="token operator">&gt;</span> /etc/iptables/iptables.rules
+
+<span class="token comment">#修改配置文件后，需要重新加载服务：</span>
+systemctl reload iptables
+<span class="token comment">#或者通过 iptables 直接加载：</span>
+iptables-restore <span class="token operator">&lt;</span> /etc/iptables/iptables.rules
+</code></pre></div><p>放行端口：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment">#例如要放行8080-8089端口</span>
+iptables <span class="token parameter variable">-I</span> INPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">8080</span>-8089 <span class="token parameter variable">-j</span> ACCEPT
+</code></pre></div><h2 id="最后总结设置"><a href="#最后总结设置" class="header-anchor">#</a> 最后总结设置</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 先清除所有规则</span>
+ipset flush
+iptables <span class="token parameter variable">--flush</span>
+
+<span class="token comment">#禁用ping，icmp协议</span>
+iptables <span class="token parameter variable">-I</span> INPUT <span class="token parameter variable">-p</span> icmp <span class="token parameter variable">-j</span> DROP
+<span class="token comment">#放行ssh端口</span>
+iptables <span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-i</span> 网卡设备 <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">--dport</span> ssh端口号 <span class="token parameter variable">-j</span> ACCEPT
+
+<span class="token comment">#在旧规则前插入新规则（在行首插入）</span>
+iptables <span class="token parameter variable">-I</span> INPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">8080</span>:8089 <span class="token parameter variable">-j</span> ACCEPT
+
+<span class="token comment"># 此处可考虑引入anti-portscan防端口扫描脚本，参考[https://github.com/zfhxi/anti-portscan](https://github.com/zfhxi/anti-portscan)</span>
+
+<span class="token comment">#丢弃规则外的包</span>
+iptables <span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-j</span> DROP
+****
+<span class="token comment"># 保存命令行规则到默认规则文件中</span>
+iptables-save <span class="token operator">&gt;</span> /etc/iptables/iptables.rules
+ipset save <span class="token operator">&gt;</span> /etc/ipset.conf
+</code></pre></div><p>查看 <code>扫描服务器非开放端口的入侵者</code> ip：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">watch</span> <span class="token parameter variable">-n1</span>  ipset list scanner-ip-set
+</code></pre></div><p>下次开机时：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 清空规则</span>
+ipset flush
+iptables <span class="token parameter variable">--flush</span>
+<span class="token comment"># 首先启动ipset</span>
+systemctl start ipset
+<span class="token comment"># 再启动iptables</span>
+systemctl start iptables
+</code></pre></div><h2 id="一些操作案例"><a href="#一些操作案例" class="header-anchor">#</a> 一些操作案例</h2> <h2 id="禁止ping"><a href="#禁止ping" class="header-anchor">#</a> 禁止ping</h2> <p>参考：<a href="https://www.jianshu.com/p/c1b786ba6b6b" target="_blank" rel="noopener noreferrer">https://www.jianshu.com/p/c1b786ba6b6b<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><strong>1）默认直接禁ping的问题？</strong></p> <div class="language-bash extra-class"><pre class="language-bash"><code>iptables <span class="token parameter variable">-I</span> INPUT <span class="token parameter variable">-p</span> icmp <span class="token parameter variable">-j</span> DROP
+</code></pre></div><p>//设置完上面的规则后，其他主机确实无法ping本机，但本机也无法ping其他主机</p> <p>//当本机ping其他主机，其他主机回应也是使用icmp，对方的回应被丢弃</p> <p><strong>2）禁止其他主机ping本机，允许本机ping其他主机</strong></p> <div class="language-bash extra-class"><pre class="language-bash"><code>iptables  <span class="token parameter variable">-A</span>  INPUT  <span class="token parameter variable">-p</span> icmp --icmp-type echo-request  <span class="token parameter variable">-j</span>  DROP
+</code></pre></div><p>//仅禁止入站的ping请求，不拒绝入站的ping回应包</p> <h2 id="只允许ssh"><a href="#只允许ssh" class="header-anchor">#</a> 只允许SSH</h2> <p>参考：<a href="https://zhuanlan.zhihu.com/p/413032776" target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/413032776<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>建议先去/etc/ssh/sshd_config修改默认端口，然后重启ssh服务。</p> <p>仅允许与此服务器的传入 SSH 连接。您可以从任何地方通过 ssh 连接到此服务器。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>iptables <span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-i</span> eth0 <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">22</span> <span class="token parameter variable">-j</span> ACCEPT
+</code></pre></div><p>上面的 iptables 命令有以下 4 个组件。</p> <ul><li>“-A INPUT”——这表明我们正在向 INPUT 链追加（或添加）一条新规则。因此，此规则适用于传入流量。</li> <li>“-i eth0” – 将根据此规则检查通过接口 eth0 的传入数据包。</li> <li>“-p tcp –dport 22” – 此规则适用于 TCP 数据包。这有一个名为“-dport 22”的 tcp 选项，它表示服务器上此规则的目标端口是 22（即 ssh）。</li> <li>“-j ACCEPT”——跳转到接受，它只是接受数据包。</li></ul> <p>简单来说，上述规则可以表述为：所有通过 eth0 for ssh 传入的数据包都将被接受。</p> <h2 id="规则最后-丢弃规则外的其他数据包"><a href="#规则最后-丢弃规则外的其他数据包" class="header-anchor">#</a> 规则最后—丢弃规则外的其他数据包</h2> <p>参考：<a href="https://zhuanlan.zhihu.com/p/413032776" target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/413032776<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>一旦您指定了接受数据包的自定义规则，您还应该有一个默认规则来丢弃任何其他数据包。</p> <p>这应该是您在 INPUT 链中的最后一条规则。</p> <p>要丢弃所有传入的数据包，请执行以下操作。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>iptables <span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-j</span> DROP
+</code></pre></div><p>构建脚本配置规则：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># vi iptables.sh</span>
+iptables <span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-i</span> eth0 <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">22</span> <span class="token parameter variable">-j</span> ACCEPT
+iptables <span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-j</span> DROP
+iptables <span class="token parameter variable">-L</span> INPUT
+</code></pre></div><h2 id="防止端口扫描"><a href="#防止端口扫描" class="header-anchor">#</a> 防止端口扫描</h2> <p>见<a href="https://github.com/zfhxi/anti-portscan" target="_blank" rel="noopener noreferrer">https://github.com/zfhxi/anti-portscan<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://github.com/EtherDream/anti-portscan/blob/master/install.sh" target="_blank" rel="noopener noreferrer">https://github.com/EtherDream/anti-portscan/blob/master/install.sh<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>例子：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/usr/bin/env bash</span>
+<span class="token comment">#</span>
+<span class="token comment"># 使用 iptables/ipset 阻止端口扫描</span>
+<span class="token comment">#</span>
+<span class="token comment"># 如果有 IP 连接未开放端口，该 IP 将进入扫描者名单，过期时间 IP_DENY_SECOND 秒。</span>
+<span class="token comment"># 如果该 IP 继续连接未开放端口，过期时间不复位，但包计数器会累计，</span>
+<span class="token comment"># 如果累计超过 PORT_SCAN_MAX，该 IP 将无法连接任何端口，直到过期。</span>
+<span class="token assign-left variable">IP_DENY_SECOND</span><span class="token operator">=</span><span class="token number">60</span>
+<span class="token assign-left variable">PORT_SCAN_MAX</span><span class="token operator">=</span><span class="token number">3</span>
+
+<span class="token comment"># 目标网卡</span>
+<span class="token assign-left variable">DEV</span><span class="token operator">=</span>enp2s0
+
+<span class="token comment">#INPUT=&quot;-A INPUT&quot;</span>
+<span class="token assign-left variable">INPUT</span><span class="token operator">=</span><span class="token string">&quot;-I INPUT&quot;</span>
+<span class="token comment"># INPUT=-t raw -A PREROUTING</span>
+
+<span class="token comment"># 开放的端口</span>
+ipset create pub-port-set bitmap:port range <span class="token number">0</span>-65535
+
+<span class="token comment"># 如果应用程序端口有变化，需及时更新该 set，否则正常用户会被当成扫描者</span>
+ipset <span class="token function">add</span> pub-port-set <span class="token number">22</span>-39 <span class="token comment"># 访问22-39之外的端口，其ip会被加入黑名单</span>
+
+<span class="token comment"># 名单最大条数</span>
+<span class="token comment"># 例如 100Mbps 网络下 IP_DENY_SECOND 秒能收到多少 SYN 包？（SYN 最小 60B）</span>
+<span class="token assign-left variable">IP_SET_MAX</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span><span class="token number">100</span> <span class="token operator">*</span> <span class="token number">1024</span> <span class="token operator">*</span> <span class="token number">1024</span> <span class="token operator">/</span> <span class="token number">8</span> <span class="token operator">/</span> <span class="token number">60</span> <span class="token operator">*</span> $IP_DENY_SECOND<span class="token variable">))</span></span>
+
+<span class="token comment"># 扫描者名单</span>
+ipset create scanner-ip-set hash:ip <span class="token punctuation">\</span>
+  <span class="token function">timeout</span> <span class="token variable">$IP_DENY_SECOND</span> <span class="token punctuation">\</span>
+  maxelem <span class="token variable">$IP_SET_MAX</span> <span class="token punctuation">\</span>
+  counters
+
+<span class="token comment">## function trap-scan ##</span>
+iptables <span class="token punctuation">\</span>
+  <span class="token parameter variable">-N</span> trap-scan
+
+<span class="token comment"># 更新扫描者 packets/bytes 计数器</span>
+iptables <span class="token punctuation">\</span>
+  <span class="token parameter variable">-A</span> trap-scan <span class="token punctuation">\</span>
+  <span class="token parameter variable">-m</span> <span class="token builtin class-name">set</span> --match-set scanner-ip-set src <span class="token punctuation">\</span>
+  <span class="token parameter variable">-j</span> DROP
+
+<span class="token comment"># 将 IP 加入扫描者名单（仅首次）</span>
+<span class="token comment"># 使用 iptables 动态改变 ipset，避免了额外的交互。本程序亮点~</span>
+iptables <span class="token punctuation">\</span>
+  <span class="token parameter variable">-A</span> trap-scan <span class="token punctuation">\</span>
+  <span class="token parameter variable">-j</span> SET <span class="token punctuation">\</span>
+  --add-set scanner-ip-set src
+
+iptables <span class="token punctuation">\</span>
+  <span class="token parameter variable">-A</span> trap-scan <span class="token punctuation">\</span>
+  <span class="token parameter variable">-j</span> DROP
+<span class="token comment">## end function ##</span>
+
+<span class="token comment"># 连接未开放端口，大概率是扫描者，交给 trap-scan 处理</span>
+iptables <span class="token punctuation">\</span>
+  <span class="token parameter variable">-i</span> <span class="token variable">$DEV</span> <span class="token punctuation">\</span>
+  <span class="token variable">$INPUT</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">--syn</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-m</span> <span class="token builtin class-name">set</span> <span class="token operator">!</span> --match-set pub-port-set dst <span class="token punctuation">\</span>
+  <span class="token parameter variable">-j</span> trap-scan
+
+<span class="token comment"># 连接未开放端口超过 PORT_SCAN_MAX 次的 IP，禁止访问任何服务！</span>
+<span class="token comment"># 此处不更新计数器</span>
+<span class="token comment"># 已建立的 TCP 不影响，因为此处只针对 --syn</span>
+iptables <span class="token punctuation">\</span>
+  <span class="token parameter variable">-i</span> <span class="token variable">$DEV</span> <span class="token punctuation">\</span>
+  <span class="token variable">$INPUT</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">--syn</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-m</span> <span class="token builtin class-name">set</span> <span class="token operator">!</span> --update-counters <span class="token punctuation">\</span>
+  --match-set scanner-ip-set src <span class="token punctuation">\</span>
+  --packets-gt <span class="token variable">$PORT_SCAN_MAX</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-j</span> DROP
+
+<span class="token comment"># 屏蔽非 SYN 类型的端口扫描</span>
+<span class="token comment"># 例如扫描者发送 ACK，服务器默认会回复 RST，仍有可能暴露端口</span>
+<span class="token comment"># 因此对于非 SYN 包，如果不匹配已建立的连接，则丢弃</span>
+iptables <span class="token punctuation">\</span>
+  <span class="token parameter variable">-i</span> <span class="token variable">$DEV</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-A</span> INPUT <span class="token punctuation">\</span>
+  <span class="token parameter variable">-p</span> tcp <span class="token operator">!</span> <span class="token parameter variable">--syn</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-m</span> conntrack <span class="token operator">!</span> <span class="token parameter variable">--ctstate</span> ESTABLISHED,RELATED <span class="token punctuation">\</span>
+  <span class="token parameter variable">-j</span> DROP
+</code></pre></div><h2 id="其他参考"><a href="#其他参考" class="header-anchor">#</a> 其他参考</h2> <p><a href="https://www.cnblogs.com/wangshui898/p/13591774.html" target="_blank" rel="noopener noreferrer">ipset常用命令<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/zfhxi/DLEnvSkills/edit/main/docs/basic_operations_of_linux/Linux系统配置/02-server_iptables_simple.md" target="_blank" rel="noopener noreferrer">Edit on GitHub</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div id="vcomments"></div> <!----> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.41c20b16.js" defer></script><script src="/assets/js/2.cfef0441.js" defer></script><script src="/assets/js/10.438ffba0.js" defer></script><script src="/assets/js/7.38e4a3bd.js" defer></script>
+  </body>
+</html>
