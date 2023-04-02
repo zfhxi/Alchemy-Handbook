@@ -202,7 +202,7 @@ groupadd -g 555 $group1
 groupmod -g 666 $group1
 ```
 
-2）将$group1的gid设置为10000，名字改为$group2
+2）将\$group1的gid设置为10000，名字改为\$group2
 
 ```bash
 groupmod –g 10000 -n $group2 $group1
@@ -218,7 +218,7 @@ newgrp $group2
 
 ### groupdel删除工作组
 
-- <$groupname>：删除$groupname的工作组。
+- <\$groupname>：删除\$groupname的工作组。
 
 示例：
 

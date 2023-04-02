@@ -35,10 +35,9 @@ chmod +x Miniconda3-pyxx.sh
 
 如何修改，可参考[https://mirrors.help/anaconda/](https://mirrors.help/anaconda/)。下面给出一个示例：
 
-`vi .condarc`添加如下到`.condarc`中：
-
+全部复制以下命令直接粘贴到终端执行：
 ```bash
-auto_activate_base: false
+echo 'auto_activate_base: false
 channels:
   - defaults
 show_channel_urls: true
@@ -49,7 +48,7 @@ default_channels:
 custom_channels:
   conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
   pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  nvidia: https://mirrors.sustech.edu.cn/anaconda-extra/cloud/
+  nvidia: https://mirrors.sustech.edu.cn/anaconda-extra/cloud/' > ~/.condarc
 ```
 
 执行`conda clean -i`，清除缓存
@@ -129,25 +128,3 @@ conda activate xxx
 # 为了使每次登录shell都能默认激活环境，因此把激活命令写入.bashrc（注意是两个右箭头）
 echo 'conda activate xxx' >> ~/.bashrc
 ```
-
-## 针对30系显卡，环境的安装
-
-1）可参考[https://zhuanlan.zhihu.com/p/382353184](https://zhuanlan.zhihu.com/p/382353184)使用conda来单独安装cuda、cudnn，然后再安装pytorch。
-
-2）如果继续使用系统预装的cuda、cudnn。安装pytorch时，可能需要去[https://download.pytorch.org/whl/torch_stable.html](https://download.pytorch.org/whl/torch_stable.html)下载相关包（这些包已经下载到3090服务器的/data/.pkgs/cu111_torch、/data/.pkgs/cu111_torchvision），或直接
-
-`pip3 install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 -f [https://download.pytorch.org/whl/torch_stable.html](https://download.pytorch.org/whl/torch_stable.html)`
-
-参考[https://pytorch.org/get-started/locally/，](https://pytorch.org/get-started/locally/)[https://github.com/nanoporetech/bonito/issues/153](https://github.com/nanoporetech/bonito/issues/153)
-
-验证环境是否可用：
-
-```bash
-$ python
->>> import torch
->>> torch.cuda.is_available()
-True
->>> torch.cuda.current_device()
-0
-```
-<!--Valine-->

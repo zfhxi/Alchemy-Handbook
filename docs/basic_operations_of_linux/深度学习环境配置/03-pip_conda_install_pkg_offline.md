@@ -6,7 +6,8 @@ category: 环境配置
 description: conda install；pip install；python setup.py install
 -->
 
-针对服务器无网络的情况，当然也可以尝试服务器联网，见《02-校园内网连网》，在无网络情况下，只有先将离线下载的包传到网上再安装。
+针对服务器无网络的情况，当然也可以尝试服务器联网，见[《校园内网联网
+》](https://liandan.idzc.top/basic_operations_of_linux/Linux%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/04-campus_network.html)，在无网络情况下，只有先将离线下载的包传到网上再安装。
 
 安装包的方式有两种，`pip install xxxx`和`conda install xxxx`，两者的区别见[https://blog.csdn.net/FrankieHello/article/details/106083428](https://blog.csdn.net/FrankieHello/article/details/106083428)，不过个人常用`pip install xxx`
 

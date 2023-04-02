@@ -9,7 +9,7 @@ description: 远程登录服务器配置ssh密钥，方便ssh、sftp、和vscode
 
 如下操作可能不适用于惯用xshell的用户，特别是windows用户，几乎对windows用户没啥大用（除非他们摆脱xshell，然而我用windows时都不能摆脱xshell）。对于Mac/Linux下惯用终端连接服务器的用户可能相对地提高效率。
 
-参考自：[https://p3terx.com/archives/configuring-ssh-keys-with-sshkeygen-and-sshcopyid.html](https://p3terx.com/archives/configuring-ssh-keys-with-sshkeygen-and-sshcopyid.html)
+## Linux/Mac
 
 1. 在本地终端中执行 `ssh-keygen`，生成密钥对（私钥和公钥），（除了修改`Enter file in which to save the key (/home/xxxx/.ssh/id_rsa):`，建议改为`/home/xxxx/.ssh/服务器名_rsa`，方便区分）一路回车 (En­ter)。
 2. 假如1中~/.ssh下生成了amax_rsa.pub和amax_ras文件
@@ -29,13 +29,18 @@ description: 远程登录服务器配置ssh密钥，方便ssh、sftp、和vscode
     
 5. 终端直接`ssh amax`实现免密登录。甚至可以方便执行`sftp amax`，来进行服务器间的文件传输。这种配置也方便vscode+remote ssh打开远程服务器。
 
+## Windows
 windows下的免密配置：<[https://segmentfault.com/a/1190000023054090](https://segmentfault.com/a/1190000023054090)>
 
-设备1已经完成免密操作，直接拷贝私钥文件到其他设备（设备2），SSH配置文件写入信息，可以直接完成免密操作
+## 分享私钥以在新设备上免密链接
 
-但是需要将拷贝后的私钥文件权限修改`chmod 600  id_rsa`
+设备1已经完成免密操作，直接拷贝私钥文件到设备2，SSH配置文件写入信息，可以直接完成免密操作。
 
-若还需要密码，见[https://blog.csdn.net/silentwolfyh/article/details/83656101](https://blog.csdn.net/silentwolfyh/article/details/83656101)：
+但是需要将拷贝后的私钥文件权限修改`chmod 600  xxx_rsa`
+
+
+## 问题
+在配置密钥对后，若还需要输入密码，见[https://blog.csdn.net/silentwolfyh/article/details/83656101](https://blog.csdn.net/silentwolfyh/article/details/83656101)：
 
 尝试修改配置`/etc/ssh/sshd_config`：
 
@@ -57,4 +62,6 @@ AuthorizedKeysFile .ssh/authorized_keys
 # 有了证书登录了，可以选择禁用密码登录，但此处仍然保留。 
 PasswordAuthentication yes
 ```
-<!--Valine-->
+
+参考：
+[https://p3terx.com/archives/configuring-ssh-keys-with-sshkeygen-and-sshcopyid.html](https://p3terx.com/archives/configuring-ssh-keys-with-sshkeygen-and-sshcopyid.html)

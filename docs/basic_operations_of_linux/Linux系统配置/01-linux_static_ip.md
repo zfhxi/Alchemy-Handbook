@@ -20,7 +20,7 @@ sudo pacman -Rsn `pacman -Qsq networkmanager` network-manager-applet
 
 ## 配置静态ip
 
-1. 先使用`ip add`查看自己的网卡设备，比如`enp2s0`
+1. 先使用`ip addr`查看自己的网卡设备，比如`enp2s0`
 2. `vi /etc/systemd/network/10-static-enp2s0.network`，来创建配置：
     
     ```bash
@@ -34,15 +34,15 @@ sudo pacman -Rsn `pacman -Qsq networkmanager` network-manager-applet
     ```
     
 3. `systemctl enable —now systemd-networkd`，即可实现绑定
-4. 再输入`ip add`查看是否绑定成功
+4. 再输入`ip addr`查看是否绑定成功
 
 ## 更改静态ip
 
-1. 首先得知道ip是多少，window插上网线查看ipconfig
+1. 首先获取目标ip。（某些场景下，可以通过笔记本电脑插网线获取一个动态分配的ip，记录改动态ip，然后拔掉网线）。
 2. `vi /etc/systemd/network/10-static-enp2s0.network`
 3. 修改Address和Gateway，参照上面创建配置得内容，修改xxx
-4. `systemctl restart systemd-networkd` ，重启服务，实现更改
-5. `ip a` 查看ip是否更改
+4. `systemctl restart systemd-networkd` ，重启服务，实现更改。
+5. `ip addr` 查看ip是否更改。
 
 ## 测试
 
@@ -54,6 +54,4 @@ curl -i www.baidu.com
 
 如果正常显示返回信息，则说明配置成功。
 
-若返回错误：`curl: (6) Couldn’t resolve host ‘xxxxxx’`，则可能是`/etc/resolv.conf`问题。
-
-<!--Valine-->
+若返回错误：`curl: (6) Couldn’t resolve host ‘xxxxxx’`，则可能是`/etc/resolv.conf`中DNS配置问题。

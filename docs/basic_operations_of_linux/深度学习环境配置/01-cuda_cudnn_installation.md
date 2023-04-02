@@ -63,7 +63,7 @@ description: 安装nvidia驱动和cuda、cudnn。并且可选择安装多个cuda
     1. 打开grup配置文件：`sudo vi /etc/default/grub`
     2. 修改：将`GRUB_CMDLINE_LINUX=""` 修改为：`GRUB_CMDLINE_LINUX="text"`
     3. 更新grub：`sudo update-grub`
-    4. 更新系统服务管理器配置：`sudo  systemctl set-default multi-user.target`
+    4. 更新系统服务管理器配置：`sudo  systemctl set-default multi-user.target`
     5. 重启：`sudo init 6`
     
     **方案2:临时关闭X server**
@@ -133,9 +133,11 @@ nvidia-smi
 官网[CUDA最新版本](https://developer.nvidia.com/cuda-downloads)
 官网[CUDA历史版本](https://developer.nvidia.com/cuda-toolkit-archive)
 
+
+![image.png](https://img.idzc.top/blog/2023/04/03/07b4177fc448b9e787abffb1a1724024_20230403000941_fc.png)
+
 查看architecture：`uname -a`
 查看distribution：`lsb_release -a`
-
 Installer Type 选择runfile(local)
 下载cuda：`cuda_10.2.89_440.33.01_linux.run`
 
@@ -150,6 +152,12 @@ sudo bash cuda_10.2.89_440.33.01_linux.run
 - 如果出现gcc不兼容，加入`—override`选项（参考[https://blog.csdn.net/HaoZiHuang/article/details/109544443](https://blog.csdn.net/HaoZiHuang/article/details/109544443)）
 
 选择如下（不覆盖驱动）：
+
+1. 图中的选中、取消是通过空格来完成。下图是过时的图片。
+2. 通常而言只需要勾选CUDA Toolkit就可以了，其他的都不需要。新版本的nvidia-fs一般不选（我目前所接触的资源不够使用这种东西）
+3. 建议点击到Options里去设置一下，这样可以自定义安装路径，而不是默认的/usr/local/cuda-10.2（如果你的用户不具备管理员权限，你对默认目录是不具备写权限的，可以更改为当前普通用户可读写的目录）。
+4. 另外建议不要选中create symbol link，因为这样会在/usr/local/bin下创建一个cuda的软链接，这样会导致系统中的cuda命令被覆盖，而且这个软链接是不可删除的，所以建议不要选中这个选项。
+5. 不需要创建desktop entry桌面图标。
 
 ![https://img.idzc.top/picgoimg/202108162355416.png](https://img.idzc.top/picgoimg/202108162355416.png)
 
@@ -181,7 +189,8 @@ To install the driver using this installer, run the following command, replacing
 Logfile is /var/log/cuda-installer.log
 ```
 
-根据上面的提示，我们需要添加环境变量。如果你是小白，（修改路径后）执行如下命令：
+
+根据上面的提示，需要添加对应环境变量。全部复制以下命令直接粘贴到终端执行（注意修改下面CUDA_HOME路径）：
 ```bash
 echo 'export CUDA_HOME=/usr/local/cuda-10.2
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
@@ -206,6 +215,7 @@ cat  $CUDA_HOME/version.txt
 ### 安装cuDNN
 
 官网[https://developer.nvidia.com/rdp/cudnn-archive](https://developer.nvidia.com/rdp/cudnn-archive)按版本对应下载`cudnn-10.2-linux-x64-v8.2.0.53.tgz`。
+![image.png](https://img.idzc.top/blog/2023/04/03/95ebd887ccc247a40c50df018e8ff398_20230403001051_74.png)
 
 解压`tar xzvf cudnn*.tgz`或`tar xvf cudnn*.tar.xz`后，执行（注意版本号对应）：
 
@@ -252,7 +262,7 @@ win+R 输入sysdm.cpl→高级→环境变量，来添加环境变量
 
 ## 测试
 
-假如你在安装完CUDA/cuDNN后，安装了pytorch或者tensorflow，通过以下方式来检查CUDA/cuDNN是否工作：
+假如你在安装完CUDA/cuDNN后，安装了pytorch或者tensorflow，那么可通过以下方式来检查CUDA/cuDNN是否工作：
 
 ```bash
 # 检查是否可用，理应返回True、0
