@@ -1,5 +1,7 @@
 """
 根据 `docs/index.md`、`docs/${BOOK}/index.md` 文件中的目录，修改 `docs/.vuepress/config.js` 文件中的 nav、sidebar 配置。
+
+
 """
 import json
 import re
