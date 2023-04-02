@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "docs:build": "vuepress build docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "valine": "^1.5.1",
+    "vue": "2.7.14",
+    "vuepress": "^1.9.7",
+    "vuepress-plugin-right-anchor": "^0.5.5",
+    "vuepress-plugin-zooming": "^1.1.8"
+  },
+  "devDependencies": {}
+}

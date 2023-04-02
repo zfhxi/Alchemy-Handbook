@@ -1,0 +1,149 @@
+// 引入字体
+@font-face{
+    font-family: 'Consolas';
+    src:url('/Consolas.ttf') format('truetype');
+}
+// @font-face{  // 微软雅黑的字体太大，因此不提供
+//     font-family: 'Microsoft YaHei';
+//     src:url('/Microsoft YaHei.ttf') format('truetype');
+// }
+@font-face{
+    font-family: 'mv boli';
+    src:url('/MV-Boli.ttf') format('truetype');
+}
+
+html {
+    height: 100%;   // 让网页填充全屏
+}
+body {
+    height: 100%;
+    background-color: #fff;    // 普通文档的背景色采用米色
+    color: #2c3e50;
+    font-family: 'Consolas', 'Microsoft YaHei', serif;
+    font-size: 16px;
+}
+body .site-name {
+    font-family: 'mv boli';
+}
+
+// 导航栏
+body .navbar {
+    background-color: #fff;
+}
+body .navbar div.links {
+    background-color: #fff;
+}
+body .navbar div.links .nav-dropdown {
+    background-color: #fff;
+}
+
+// 正文部分
+body .page {
+    background-color: #fff;
+}
+
+
+// 侧边栏
+body .sidebar {
+    background-color: #fff;
+}
+// 侧边栏的分组标题（不带链接时）
+body .sidebar-heading {
+    font-weight: normal;
+}
+// 侧边栏中的箭头
+.arrow.right {
+    border-left-color: gray;
+    opacity: 0.5;
+}
+.arrow.down {
+    border-left-color: gray;
+    opacity: 0.5;
+}
+
+.sidebar-group a.sidebar-link {
+    font-size: 0.8rem;
+    border-bottom: 1px dashed rgb(162, 175, 185);
+}
+
+// 右侧目录栏
+.right-anchor {
+    opacity: 0.8;
+    max-width:12rem;
+}
+.ra-menu{
+    padding-left: 10px!important;
+}
+.ra-menu-item{
+    padding-right:0 !important;
+    padding-top:0 !important;
+    padding-bottom:0 !important;
+    font-weight: normal!important;
+}
+.ra-menu-item.h1{
+    font-size: 0.8rem;
+}
+.ra-menu-item.h2{
+    font-size: 0.8rem;
+}
+.ra-menu-item.h3{
+    font-size: 0.7rem;
+}
+
+
+// MarkDown 文档中的表格
+body td, th {
+    border: 1px solid #a3a3a3;
+}
+// MarkDown 文档中的行内代码块
+body .theme-default-content code {
+    font-family: 'Consolas', 'Microsoft YaHei', serif;
+    line-height: normal;
+    background: rgba(135, 131, 120, 0.15);
+    color: rgb(235, 87, 87);
+    border-radius: 3px;
+    font-size: 85%;
+    padding: 0.2em 0.4em;
+}
+// MarkDown 文档中的代码块
+body div[class*="language-"] {
+    background-color: #3d3d3d;
+}
+// MarkDown 文档中的代码块
+body div[class*="language-"] pre[class*="language-"] code {
+    color: #d9d9d9;
+    font-family: 'Consolas', 'Microsoft YaHei', serif;
+}
+
+
+// 自定义首页
+main.home {
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+main.home div.footer {
+    display: none;
+}
+
+
+
+// Valine
+#vcomments{
+    max-width: 65rem;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+}
+
+img.vimg {
+     transition: all 1s   /* 旋转时间为 1s */
+}
+
+img.vimg:hover {
+     transform: rotate(360deg);
+     -webkit-transform: rotate(360deg);
+     -moz-transform: rotate(360deg);
+     -o-transform: rotate(360deg);
+     -ms-transform: rotate(360deg);
+}
+
