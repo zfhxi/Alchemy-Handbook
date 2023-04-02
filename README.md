@@ -12,7 +12,7 @@ Template from [LeoHsiao1/Notes](https://github.com/LeoHsiao1/Notes)
   ```
 - [可选]环境变量设置：
     - `VITE_VALINE_APP_ID`：Valine评论系统的appId；
-    - `VITE_VALINE_APP_KEY`：Valine评论系统的appKey；
+    - `VITE_VALINE_APP_KEY`：Valine评论系统的appKey；这两个变量位于[Environment variables](https://github.com/zfhxi/Alchemy-Handbook/settings/environments/952272111/edit)。
 
 ## 配置
 
