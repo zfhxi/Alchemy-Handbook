@@ -19,7 +19,7 @@ description: 哆点连接、vpn连接
 
 ### 直接食用
 
-1. 我已经编译好了一份可执行的登录程序，***[下载](https://gitee.com/julianchern/arch/raw/master/pkgs/drcom-for-Linux.tar.bz2)***
+1. 我已经编译好了一份可执行的登录程序，**[下载](https://gitee.com/julianchern/arch/raw/master/pkgs/drcom-for-Linux.tar.bz2)**
 2. 将下载的`drcom.tar.bz2`上传到服务器解压，如解压到家目录`tar xjvf drcom.tar.bz2 -C $HOME`。（如果不知道如何上传，见《15-PC和服务器间进行文件传输》）
 3. 注意解压后得到的文件夹为`.drcom`，是一个隐藏文件夹，执行`ls -a`查看到该文件夹。这是为了考虑隐私问题，防止账号密码被其他人查看，因此你甚至还可以对`.drcom`文件夹设置仅自己账户可读写执行权限：`chmod 700 -R .drcom`
 4. 先修改`drcom.conf`中的账户和密码，然后赋予`dogcom`、`dr.sh`可执行权限（`chmod u+x dogcom`、`chmod u+x dr.sh`），最后运行`./dr.sh`。
