@@ -151,14 +151,6 @@ sudo bash cuda_10.2.89_440.33.01_linux.run
 
 选择如下（不覆盖驱动）：
 
-
-1. 图中的选中、取消是通过空格来完成。下图是过时的图片。
-2. 通常而言只需要勾选CUDA Toolkit就可以了，其他的都不需要。新版本的nvidia-fs一般不选（我目前所接触的资源不够使用这种东西）
-3. 建议点击到Options里去设置一下，这样可以自定义安装路径，而不是默认的/usr/local/cuda-10.2（如果你的用户不具备管理员权限，你对默认目录是不具备写权限的，可以更改为当前普通用户可读写的目录）。
-4. 另外建议不要选中create symbol link，因为这样会在/usr/local/bin下创建一个cuda的软链接，这样会导致系统中的cuda命令被覆盖，而且这个软链接是不可删除的，所以建议不要选中这个选项。
-5. 不需要创建desktop entry桌面图标。
-
-
 ![https://img.idzc.top/picgoimg/202108162355416.png](https://img.idzc.top/picgoimg/202108162355416.png)
 
 
@@ -216,7 +208,7 @@ cat  $CUDA_HOME/version.txt
 官网[https://developer.nvidia.com/rdp/cudnn-archive](https://developer.nvidia.com/rdp/cudnn-archive)按版本对应下载`cudnn-10.2-linux-x64-v8.2.0.53.tgz`。
 
 解压`tar xzvf cudnn*.tgz`或`tar xvf cudnn*.tar.xz`后，执行（注意版本号对应）：
-如果你前面的CUDA安装成功了，也可以执行：
+
 ```bash
 cd cudnn-*-archive/
 sudo cp include/cudnn*.h $CUDA_HOME/include 
