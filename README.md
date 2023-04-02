@@ -3,21 +3,16 @@
 
 Template from [LeoHsiao1/Notes](https://github.com/LeoHsiao1/Notes)
 
-## 部署
+## 本地调试
 
 - 调试时，只需启动开发环境的服务器：
   ```sh
   yarn install
   yarn dev
   ```
-
-- 正式部署的步骤：
-  1. 先构建网站：
-      ```sh
-      yarn
-      yarn vuepress build docs
-      ```
-      构建结果会保存到 `docs/.vuepress/dist/` 目录下，用 Nginx 代理即可。
+- [可选]环境变量设置：
+    - `VITE_VALINE_APP_ID`：Valine评论系统的appId；
+    - `VITE_VALINE_APP_KEY`：Valine评论系统的appKey；
 
 ## 配置
 
@@ -36,3 +31,8 @@ Template from [LeoHsiao1/Notes](https://github.com/LeoHsiao1/Notes)
 
 ## 新建笔记
 - 先占个坑
+
+## TODO List
+
+- [ ] 修改`set_sidebar.py`使其跳过markdown文件的frontmatter部分的解析。
+
