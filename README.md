@@ -34,4 +34,4 @@ Template from [LeoHsiao1/Notes](https://github.com/LeoHsiao1/Notes)
 
 ## TODO List
 
-- [ ] 修改`set_sidebar.py`使其跳过markdown文件的frontmatter部分的解析。
+- [x] 修改`set_sidebar.py`使其跳过markdown文件的frontmatter部分的解析。
