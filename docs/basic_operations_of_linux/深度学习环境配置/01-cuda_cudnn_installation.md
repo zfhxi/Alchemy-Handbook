@@ -9,20 +9,16 @@ description: 安装nvidia驱动和cuda、cudnn。并且可选择安装多个cuda
 
 ## 前言
 
-1）大多数情况下，用户会事先安装nvidia驱动。
+1. 大多数情况下，用户会事先安装nvidia驱动。
+    * Linux如果已经安装nvidia驱动，可输入`nvidia-smi`查看`driver api`的cuda版本。
+      而当你成功cuda后，输入`nvcc --version`得到的`runtime api`的cuda版本与`driver api`的cuda版本不一致。
+    * windows下，右键→nvidia控制面板→帮助→系统信息→组件→NVCUDA64.DLL项的产品名称会显示`driver api`的cuda版本。
 
-Linux如果已经安装nvidia驱动，可输入`nvidia-smi`查看`driver api`的cuda版本。
-
-而当你成功cuda后，输入`nvcc --version`得到的`runtime api`的cuda版本与`driver api`的cuda版本不一致。
-
-windows下，右键→nvidia控制面板→帮助→系统信息→组件→NVCUDA64.DLL项的产品名称会显示`driver api`的cuda版本。
-
-2）上面版本不一致，大概率是因为用户事先单独安装了nvidia驱动，而不是使用cuda包中集成的GPU Installer Driver。当然下面是先单独安装了nvidia驱动（因为有时有多cuda版本的需求，没必要使用集成驱动，也可以灵活处理），如何处理确实考验用户的敏捷了。
+2. 上面版本不一致，大概率是因为用户事先单独安装了nvidia驱动，而不是使用cuda包中集成的GPU Installer Driver。当然下面是先单独安装了nvidia驱动（因为有时有多cuda版本的需求，没必要使用集成驱动，也可以灵活处理），如何处理确实考验用户的敏捷了。
 
 > `driver api`的版本能向下兼容`runtime api`的版本，即nvidia-smi 显示的版本大于nvcc --version 的版本通常不会出现大问题。
 > 
 
-参考：[https://www.jianshu.com/p/eb5335708f2a](https://www.jianshu.com/p/eb5335708f2a)
 
 ## 版本对应表
 
@@ -40,42 +36,8 @@ windows下，右键→nvidia控制面板→帮助→系统信息→组件→NVCU
 
 [https://developer.nvidia.com/rdp/cudnn-archive](https://developer.nvidia.com/rdp/cudnn-archive)
 
-## ArchLinux下安装（限管理员）
 
-- 这是不建议的方式，尽管ArchLinux的AUR仓库提供了很多深度学习、机器学习软件包，但是他们严重依赖某一cuda版本，不建议用AUR安装大多数的、深度学习相关的包。
-    
-    
-    以下在GTX 1660TI、RTX 3090下测试。
-    
-    1）如果你能保证仓库中的最新版CUDA、cuDNN适合你的环境的话，直接执行：
-    
-    ```bash
-    pacman -S nvidia-lts cuda cudnn
-    ```
-    
-    然而通常并不能做这样的保证，所以需要自己下载对应的版本
-    
-    2）你可以先在[https://archive.archlinux.org/packages/c/](https://archive.archlinux.org/packages/c/)或清华源[https://arch-archive.tuna.tsinghua.edu.cn/](https://arch-archive.tuna.tsinghua.edu.cn/)的community库中（推荐后者）找到合适的cuda、cudnn版本，下载pkg.tar.zst文件
-    
-    [可选]然后拷贝文件到`/var/pacman/cache/pkg`目录，并cd到此
-    
-    然后执行：
-    
-    ```bash
-    sudo pacman -U cuda-xxxx-x86_64.pkg.tar.zst
-    sudo pacman -U cudnn-xxxx-x86_64.pkg.tar.zst
-    ```
-    
-    如果你安装了最新的版本，也可以通过2）的操作配合[downgrade](https://wiki.archlinux.org/title/Downgrading_packages_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))工具来降级。
-    
-    最后为了防止管理员手抽筋执行了`sudo pacman -Syyu`导致升级cuda、cudnn，因此修改/etc/pacman.conf来忽略这些包的升级：
-    
-    ```bash
-    IgnorePkg = cuda cudnn
-    ```
-    
-
-## Debian下安装
+## Linux下安装(Debian系为例)
 
 驱动需要管理员身份安装，CUDA、cuDNN部分可由普通用户选择安装自己有权限的目录里（这适用于需要使用多cuda版本的场景）。
 
@@ -87,31 +49,27 @@ windows下，右键→nvidia控制面板→帮助→系统信息→组件→NVCU
 
 注意事项：
 
-- 据说在以下步骤进行之前，你需要在bios里关闭secure boot，否则安装NVIDIA驱动时会报错；
-    
-    `The target kernel has CONFIG_MODULE_SIG set, which means that it supports cryptographic signatures on kernel modules. On some systems, the kernel may refuse to load modules without a valid signature from a trusted key. This system also has UEFI Secure Boot enabled; many distributions enforce module signature verification on UEFFI systems when SecureBoot is enable. Would you like to sign NVIDIA kernel module?`
+- 据说在以下步骤进行之前，你需要在bios里关闭secure boot，否则安装NVIDIA驱动时会报错: 
+    ```
+    The target kernel has CONFIG_MODULE_SIG set, which means that it supports cryptographic signatures on kernel modules. On some systems, the kernel may refuse to load modules without a valid signature from a trusted key. This system also has UEFI Secure Boot enabled; many distributions enforce module signature verification on UEFFI systems when SecureBoot is enable. Would you like to sign NVIDIA kernel module?
+    ```
     
 - 以下步骤都在tty下进行，所以建议关闭图形界面。
-    
-    ***方案1:关闭图形界面***
-    
+
+    **方案1:关闭图形界面**
+
     参考：[debian关闭图形界面_配置Debian系统不启用图形界面，只有命令行界面的方法_51CTO博客_debian 关闭图形界面](https://blog.51cto.com/u_15127583/4259155)
     
-    1.打开grup配置文件：`sudo vi /etc/default/grub`
+    1. 打开grup配置文件：`sudo vi /etc/default/grub`
+    2. 修改：将`GRUB_CMDLINE_LINUX=""` 修改为：`GRUB_CMDLINE_LINUX="text"`
+    3. 更新grub：`sudo update-grub`
+    4. 更新系统服务管理器配置：`sudo  systemctl set-default multi-user.target`
+    5. 重启：`sudo init 6`
     
-    2.修改：将`GRUB_CMDLINE_LINUX=""` 修改为：`GRUB_CMDLINE_LINUX="text"`
+    **方案2:临时关闭X server**
     
-    3.更新grub：`sudo update-grub`
-    
-    4.更新系统服务管理器配置：`sudo  systemctl set-default multi-user.target`
-    
-    5.重启：`sudo init 6`
-    
-    ***方案2:临时关闭X server***
-    
-    1.查看当前桌面管理器: `cat /etc/X11/default-display-manager`
-    
-    2.停止服务: `sudo systemctl stop lightdm`
+    1. 查看当前桌面管理器: `cat /etc/X11/default-display-manager`
+    2. 停止服务: `sudo systemctl stop lightdm`
     
 
 先禁用闭源驱动：
@@ -138,7 +96,6 @@ sudo update-initramfs -u
 ```
 
 显卡是TITAN RTX，去官网下载对应驱动`NVIDIA-Linux-x86_64-460.84.run`
-
 安装之前安装以下需要依赖的包：
 
 ```bash
@@ -162,7 +119,6 @@ chmod +x NVIDIA-Linux-x86_64-460.84.run
 ```
 
 基本上一直选YES就对了
-
 然后执行如下来检测驱动是否装上：
 
 ```bash
@@ -175,15 +131,12 @@ nvidia-smi
 > 
 
 官网[CUDA最新版本](https://developer.nvidia.com/cuda-downloads)
-
 官网[CUDA历史版本](https://developer.nvidia.com/cuda-toolkit-archive)
 
 查看architecture：`uname -a`
-
 查看distribution：`lsb_release -a`
 
 Installer Type 选择runfile(local)
-
 下载cuda：`cuda_10.2.89_440.33.01_linux.run`
 
 执行：
@@ -198,7 +151,17 @@ sudo bash cuda_10.2.89_440.33.01_linux.run
 
 选择如下（不覆盖驱动）：
 
+
+1. 图中的选中、取消是通过空格来完成。下图是过时的图片。
+2. 通常而言只需要勾选CUDA Toolkit就可以了，其他的都不需要。新版本的nvidia-fs一般不选（我目前所接触的资源不够使用这种东西）
+3. 建议点击到Options里去设置一下，这样可以自定义安装路径，而不是默认的/usr/local/cuda-10.2（如果你的用户不具备管理员权限，你对默认目录是不具备写权限的，可以更改为当前普通用户可读写的目录）。
+4. 另外建议不要选中create symbol link，因为这样会在/usr/local/bin下创建一个cuda的软链接，这样会导致系统中的cuda命令被覆盖，而且这个软链接是不可删除的，所以建议不要选中这个选项。
+5. 不需要创建desktop entry桌面图标。
+
+
 ![https://img.idzc.top/picgoimg/202108162355416.png](https://img.idzc.top/picgoimg/202108162355416.png)
+
+
 
 安装完后的信息：
 
@@ -226,15 +189,14 @@ To install the driver using this installer, run the following command, replacing
 Logfile is /var/log/cuda-installer.log
 ```
 
-然后修改.bashrc，注意替换路径
-
+根据上面的提示，我们需要添加环境变量。如果你是小白，（修改路径后）执行如下命令：
 ```bash
-export CUDA_HOME=/usr/local/cuda-10.2
+echo 'export CUDA_HOME=/usr/local/cuda-10.2
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
-export PATH=$CUDA_HOME/bin:$PATH
+export PATH=$CUDA_HOME/bin:$PATH' >> ~/.bashrc
 ```
 
-然后`source .bashrc`，再`nvcc -V`
+然后`source ~/.bashrc`，再`nvcc -V`进行检查安装是否成功：
 
 ```bash
 nvcc: NVIDIA (R) Cuda compiler driver
@@ -246,24 +208,23 @@ Cuda compilation tools, release 10.2, V10.2.89
 or
 
 ```bash
-cat  /usr/local/cuda/version.txt
+cat  $CUDA_HOME/version.txt
 ```
 
 ### 安装cuDNN
 
-官网[https://developer.nvidia.com/rdp/cudnn-archive](https://developer.nvidia.com/rdp/cudnn-archive)按版本对应下载`cudnn-10.2-linux-x64-v8.2.0.53.tgz`
+官网[https://developer.nvidia.com/rdp/cudnn-archive](https://developer.nvidia.com/rdp/cudnn-archive)按版本对应下载`cudnn-10.2-linux-x64-v8.2.0.53.tgz`。
 
 解压`tar xzvf cudnn*.tgz`或`tar xvf cudnn*.tar.xz`后，执行（注意版本号对应）：
-
+如果你前面的CUDA安装成功了，也可以执行：
 ```bash
 cd cudnn-*-archive/
-sudo cp include/cudnn*.h /usr/local/cuda/include 
-sudo cp -P lib/libcudnn* /usr/local/cuda/lib64
-cd /usr/local/cuda[-xx.x]/
-sudo chmod a+r include/cudnn*.h lib64/libcudnn*
+sudo cp include/cudnn*.h $CUDA_HOME/include 
+sudo cp -P lib/libcudnn* $CUDA_HOME/lib64
+sudo chmod a+r $CUDA_HOME/include/cudnn*.h $CUDA_HOME/lib64/libcudnn*
 ```
 
-通过`cat /usr/local/cuda-10.2/include/cudnn.h | grep CUDNN_MAJOR -A 2`，确认是否安装成功（或者`cat /usr/local/cuda-10.2/include/cudnn_version.h`）
+通过`cat $CUDA_HOME/include/cudnn.h | grep CUDNN_MAJOR -A 2`，确认是否安装成功（或者`cat $CUDA_HOME/include/cudnn_version.h`）
 
 ![https://img.idzc.top/picgoimg/202108162356580.png](https://img.idzc.top/picgoimg/202108162356580.png)
 
@@ -274,7 +235,6 @@ sudo chmod a+r include/cudnn*.h lib64/libcudnn*
 1）官网[https://link.ailemon.net/?target=https://developer.nvidia.com/cuda-downloads](https://link.ailemon.net/?target=https://developer.nvidia.com/cuda-downloads)(最新版本)or[https://link.ailemon.net/?target=https://developer.nvidia.com/cuda-toolkit-archive](https://link.ailemon.net/?target=https://developer.nvidia.com/cuda-toolkit-archive)(历史版本) 
 
 下载cuda：`cuda_11.1.1_456.81_win10.exe`
-
 在[https://developer.nvidia.com/rdp/cudnn-archive](https://developer.nvidia.com/rdp/cudnn-archive)下载cudnn：`cudnn-11.1-windows-x64-v8.0.5.39.zip`
 
 2）下载完后，先安装cuda，打开exe文件，基本上点点就完事儿，注意下面的选择（只选cuda）：
@@ -292,18 +252,15 @@ NVIDIA GeForce Experience是游戏相关的驱动（不会没人还没装吧？�
 5）解压缩cudnn-xxx.zip，将对应的bin、include、lib文件夹与cuda安装目录下的对应目录进行合并，理论上不会出现覆盖。
 
 win+R 输入sysdm.cpl→高级→环境变量，来添加环境变量
-
 系统变量的`CUDA_PATH`保证值为刚才的安装目录：如`D:\02DevelopTools\cuda11.1\computing_toolkit`
 
 然后Path里添加记录：
-
-`%CUDA_PATH%\bin`
-
-`D:\02DevelopTools\cuda11.1\computing_toolkit\lib\x64`
+* `%CUDA_PATH%\bin`
+* `D:\02DevelopTools\cuda11.1\computing_toolkit\lib\x64`
 
 ## 测试
 
-假如你已经安装了pytorch或者tensorflow：
+假如你在安装完CUDA/cuDNN后，安装了pytorch或者tensorflow，通过以下方式来检查CUDA/cuDNN是否工作：
 
 ```bash
 # 检查是否可用，理应返回True、0
@@ -332,9 +289,6 @@ PATH=/usr/local/cuda-10.2/bin:$PATH
 参考：
 
 [https://blog.csdn.net/zhouchen1998/article/details/107778087](https://blog.csdn.net/zhouchen1998/article/details/107778087)
-
 [https://blog.ailemon.net/2020/07/27/windows-install-cuda-and-cudnn-environment/](https://blog.ailemon.net/2020/07/27/windows-install-cuda-and-cudnn-environment/)
-
 [https://zhuanlan.zhihu.com/p/29841665](https://zhuanlan.zhihu.com/p/29841665)
-
-<!--Valine-->
+[https://www.jianshu.com/p/eb5335708f2a](https://www.jianshu.com/p/eb5335708f2a)
