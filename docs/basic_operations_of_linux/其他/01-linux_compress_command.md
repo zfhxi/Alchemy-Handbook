@@ -116,9 +116,6 @@ $ ls *.tgz | xargs -n1 tar xzvf
 
 参考：
 
-[https://www.jianshu.com/p/b835a4d5bb4e](https://www.jianshu.com/p/b835a4d5bb4e)
-
-[https://www.cnblogs.com/dyh-air/articles/9069642.html](https://www.cnblogs.com/dyh-air/articles/9069642.html)
-
-[http://www.360doc.com/content/14/1212/11/18578054_432344502.shtml](http://www.360doc.com/content/14/1212/11/18578054_432344502.shtml)
-<!--Valine-->
+[https://www.jianshu.com/p/b835a4d5bb4e](https://www.jianshu.com/p/b835a4d5bb4e)  
+[https://www.cnblogs.com/dyh-air/articles/9069642.html](https://www.cnblogs.com/dyh-air/articles/9069642.html)  
+[http://www.360doc.com/content/14/1212/11/18578054_432344502.shtml](http://www.360doc.com/content/14/1212/11/18578054_432344502.shtml)  

@@ -87,9 +87,6 @@ dpkg -x package.deb <pkg_dir> # 解压获取的包
 
 ## 参考
 
-[http://ijinjay.github.io/blog/2016-04/非特权用户安装zsh和Oh-My-Zsh.html](http://ijinjay.github.io/blog/2016-04/%E9%9D%9E%E7%89%B9%E6%9D%83%E7%94%A8%E6%88%B7%E5%AE%89%E8%A3%85zsh%E5%92%8COh-My-Zsh.html)
-
-[https://stickcui.github.io/2019/05/07/Linux下非root用户安装软件至本地/](https://stickcui.github.io/2019/05/07/Linux%E4%B8%8B%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E8%87%B3%E6%9C%AC%E5%9C%B0/)
-
+[http://ijinjay.github.io/blog/2016-04/非特权用户安装zsh和Oh-My-Zsh.html](http://ijinjay.github.io/blog/2016-04/%E9%9D%9E%E7%89%B9%E6%9D%83%E7%94%A8%E6%88%B7%E5%AE%89%E8%A3%85zsh%E5%92%8COh-My-Zsh.html)  
+[https://stickcui.github.io/2019/05/07/Linux下非root用户安装软件至本地/](https://stickcui.github.io/2019/05/07/Linux%E4%B8%8B%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E8%87%B3%E6%9C%AC%E5%9C%B0/)  
 [https://blog.csdn.net/liuxiao723846/article/details/97617681](https://blog.csdn.net/liuxiao723846/article/details/97617681)
-<!--Valine-->

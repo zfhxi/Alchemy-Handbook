@@ -6,7 +6,6 @@ category: Linux奇技淫巧
 description: htop的每一栏大致展示的信息介绍
 -->
 
-摘抄自：[https://zhuanlan.zhihu.com/p/296803907](https://zhuanlan.zhihu.com/p/296803907)，[https://cloud.tencent.com/developer/article/1115041](https://cloud.tencent.com/developer/article/1115041)‘
 
 ![https://img.idzc.top/picgoimg/202110051810511.png](https://img.idzc.top/picgoimg/202110051810511.png)
 
@@ -71,12 +70,12 @@ description: htop的每一栏大致展示的信息介绍
 
 ### htop选项：
 
--u \<username>：显示指定用户的进程；
+- `-u` \<username>：显示指定用户的进程；  
+- `-d`：设置刷新时间，单位为秒；  
+- `-C`：设置界面为无颜色；  
+- `-s` ：以指定的列排序；如htop -s PID  
 
--d：设置刷新时间，单位为秒；
+摘抄自：
 
--C：设置界面为无颜色；
-
--s ：以指定的列排序；如htop -s PID
-
-<!--Valine-->
+[https://zhuanlan.zhihu.com/p/296803907](https://zhuanlan.zhihu.com/p/296803907)  
+[https://cloud.tencent.com/developer/article/1115041](https://cloud.tencent.com/developer/article/1115041)‘

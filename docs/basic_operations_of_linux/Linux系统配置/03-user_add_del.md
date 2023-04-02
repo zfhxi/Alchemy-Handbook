@@ -313,15 +313,9 @@ done
 
 参考：
 
-[https://zhuanlan.zhihu.com/p/205217949](https://zhuanlan.zhihu.com/p/205217949)
-
-[https://man.linuxde.net/](https://man.linuxde.net/)
-
-[https://linux.die.net/man/8/](https://linux.die.net/man/8/)
-
-[https://man7.org/linux/man-pages/man1](https://man7.org/linux/man-pages/man1)
-
-[https://www.runoob.com/linux/linux-user-manage.html](https://www.runoob.com/linux/linux-user-manage.html)
-
-[https://www.cnblogs.com/xd502djj/archive/2011/11/23/2260094.html](https://www.cnblogs.com/xd502djj/archive/2011/11/23/2260094.html)
-<!--Valine-->
+[https://zhuanlan.zhihu.com/p/205217949](https://zhuanlan.zhihu.com/p/205217949)  
+[https://man.linuxde.net/](https://man.linuxde.net/)  
+[https://linux.die.net/man/8/](https://linux.die.net/man/8/)  
+[https://man7.org/linux/man-pages/man1](https://man7.org/linux/man-pages/man1)  
+[https://www.runoob.com/linux/linux-user-manage.html](https://www.runoob.com/linux/linux-user-manage.html)  
+[https://www.cnblogs.com/xd502djj/archive/2011/11/23/2260094.html](https://www.cnblogs.com/xd502djj/archive/2011/11/23/2260094.html)  

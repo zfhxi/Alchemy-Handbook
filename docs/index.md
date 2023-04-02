@@ -10,7 +10,6 @@ tagline: null
 <font color=black>
 Hello 炼丹师 !<br/>
 > 该笔记主要用于记录深度学习炼丹的一些操作技巧，欢迎指正。<br/>
-> 不完全迁移自<a href='https://liandan.super.site'>https://liandan.super.site</a>。
 </font>
 
 > <font color=black size=5> 目录：</font>

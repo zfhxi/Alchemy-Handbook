@@ -28,5 +28,6 @@ kill $(ps aux | grep 进程名 | grep 用户名 |grep -v grep | awk '{print $2}'
 ps -o ruser=userForLongName -e -o pid,cmd |grep 用户名|grep 进程名|grep -v grep | awk '{print $2}'
 ```
 
-参考：[https://blog.csdn.net/qq_15682815/article/details/87921482](https://blog.csdn.net/qq_15682815/article/details/87921482)
-<!--Valine-->
+参考：
+
+[https://blog.csdn.net/qq_15682815/article/details/87921482](https://blog.csdn.net/qq_15682815/article/details/87921482)
