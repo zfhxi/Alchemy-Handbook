@@ -174,7 +174,7 @@ module.exports = {
             ],
             "/programming_magic/": [
                 {
-                    title: "《02编程奇技淫巧》",
+                    title: "《编程奇技淫巧》",
                     path: "/programming_magic/"
                 },
                 {
