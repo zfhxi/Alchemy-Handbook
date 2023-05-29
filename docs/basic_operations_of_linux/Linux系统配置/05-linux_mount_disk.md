@@ -7,9 +7,19 @@ create_date: October 2, 2021 3:56 PM
 description: 挂载ntfs、ext4盘
 -->
 
-这里主要考虑usb移动硬盘，并且主要考虑ext4和ntfs两种格式
+这里主要考虑在服务器上挂载usb移动硬盘来快速传输数据，并且主要考虑ext4、ntfs、exfat三种格式。
+各个格式的区别与各自优缺点，可参考：
+
+1. https://www.cnblogs.com/gmpy/p/13255644.html
+2. https://www.bilibili.com/read/cv5350750/
 
 ## 手动挂载
+
+<font color="#ff0000">在挂载前一定要先知道自己硬盘的文件系统格式</font>，然后根据相应的格式来进行下一步操作。因为有的格式并不被Linux原生支持（如ntfs、exfat），需要安装额外地软件包。而有的格式是linux原生支持的（如fat32、ext4）。
+
+因此，首先参考[https://www.linuxprobe.com/partition-file-system.html](https://www.linuxprobe.com/partition-file-system.html)查看硬盘分区Type（ext4？ntfs？）
+
+其中经测试的靠谱的命令是在su下，`blkid`和`lsblk -f`
 
 ### 挂载ext4盘
 
@@ -22,9 +32,7 @@ mount -t ext4 /dev/sdxxx /mnt/diskxxx
 
 ### 挂载NTFS盘
 
-首先参考[https://www.linuxprobe.com/partition-file-system.html](https://www.linuxprobe.com/partition-file-system.html)查看硬盘分区Type（ext4？ntfs？）
 
-其中经测试的靠谱的命令是在su下，`blkid`和`lsblk -f`
 
 1）Debian系列安装相关包：
 
@@ -58,6 +66,9 @@ sudo pacman -S ntfs-3g
 mkdir /mnt/diskxxx
 ntfs-3g /dev/your_NTFS_partition /mnt/diskxxx
 ```
+### 挂载exFAT盘
+
+待补充……
 
 ## 自动挂载
 
