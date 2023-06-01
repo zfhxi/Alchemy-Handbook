@@ -68,7 +68,13 @@ ntfs-3g /dev/your_NTFS_partition /mnt/diskxxx
 ```
 ### 挂载exFAT盘
 
-待补充……
+
+参考[https://blog.csdn.net/weixin_44904205/article/details/129105504]来实现
+```bash
+pacman -S exfat-utils fuse-exfat
+mkdir /mnt/exfat
+mount -t exfat /dev/*** /mnt/exfat
+```
 
 ## 自动挂载
 
