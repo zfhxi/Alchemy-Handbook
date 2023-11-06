@@ -117,6 +117,10 @@ module.exports = {
                         {
                             title: "Linux下CPU频率调整",
                             path: "/basic_operations_of_linux/Linux系统配置/06-linux_cpu_freq"
+                        },
+                        {
+                            title: "Linux下使用clash代理",
+                            path: "/basic_operations_of_linux/Linux系统配置/07-linux_clash"
                         }
                     ]
                 },
