@@ -11,13 +11,15 @@ git checkout your_branch
 git reset --hard origin/main
 ```
 
-2. 然后进行修改内容，修改完成后，提交到自己的分支上，然后向主分支发起pull request。
+2. 然后进行修改内容。如果你新建了md文档，为了网页能生成完整的左侧目录栏，请执行`python3 etc/set_sidebar`。
+
+3. 修改完后提交到自己的分支上，然后向主分支发起pull request。
 ![13_49_16-1699278555116.png](https://img.idzc.top/picgoimg/2023/11/06/13_49_16-1699278555116.png)
     > 如上图，会先看到自己分支比主分支更加新，点击`Compare & pull request`，然后填写PR信息，点击`Create pull request`即可。
 
     ![13_51_47-1699278706447.png](https://img.idzc.top/picgoimg/2023/11/06/13_51_47-1699278706447.png)
 
-3. [@zfhxi](https://github.com/zfhxi)收到PR后，会进行review，如果通过，会合并到主分支上。
+4. [@zfhxi](https://github.com/zfhxi)收到PR后，会进行review，如果通过，会合并到主分支上。
 
 ## 本地调试
 
