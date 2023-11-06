@@ -15,6 +15,7 @@ comment: false
   - [校园内网联网](Linux系统配置/04-campus_network.md)
   - [Linux挂载硬盘](Linux系统配置/05-linux_mount_disk.md)
   - [Linux下CPU频率调整](Linux系统配置/06-linux_cpu_freq.md)
+  - [Linux下使用clash代理](Linux系统配置/07-linux_clash.md)
 
 - 效率神器
   - [tmux使用简记](效率神器/01-tmux.md)
